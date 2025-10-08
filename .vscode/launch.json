@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/danil/education/baseStruct/C++",
-      "program": "/Users/danil/education/baseStruct/C++/build/Debug/outDebug"
+      "cwd": "/Users/danil/education/baseStruct/C++/src",
+      "program": "/Users/danil/education/baseStruct/C++/src/build/Debug/outDebug"
     }
   ]
 }
