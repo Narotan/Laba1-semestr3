@@ -1,0 +1,19 @@
+{
+  "arrays": {},
+  "lists": {
+    "mylinkedlist": [
+      43,
+      43,
+      43,
+      10
+    ]
+  },
+  "dllists": {
+    "bred": [
+      20
+    ]
+  },
+  "stacks": {},
+  "queues": {},
+  "trees": {}
+}

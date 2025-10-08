@@ -1,0 +1,184 @@
+═══════════════════════════════════════════════════════════════════════════════
+                          КОМАНДЫ ДЛЯ РАБОТЫ С DBMS
+═══════════════════════════════════════════════════════════════════════════════
+
+МАССИВ (Array) - команды начинаются с M:
+─────────────────────────────────────────
+  MPUSH <name> <value>           - Добавить элемент в конец массива
+  MINSERT <name> <index> <value> - Вставить элемент по индексу
+  MSET <name> <index> <value>    - Изменить элемент по индексу
+  MDEL <name> <value>            - Удалить элемент по значению
+  MDELINDEX <name> <index>       - Удалить элемент по индексу
+  MGET <name>                    - Вывести весь массив
+  MGET <name> <index>            - Получить элемент по индексу
+  MSIZE <name>                   - Получить размер массива
+
+  Примеры:
+    ./dbms --query "MPUSH myarr hello"
+    ./dbms --query "MPUSH myarr world"
+    ./dbms --query "MINSERT myarr 1 NEW"    # Вставит NEW между hello и world
+    ./dbms --query "MGET myarr"             # Выведет: [hello NEW world]
+    ./dbms --query "MGET myarr 0"           # Выведет: hello
+    ./dbms --query "MSET myarr 2 CHANGED"   # Изменит world на CHANGED
+    ./dbms --query "MDELINDEX myarr 1"      # Удалит NEW
+    ./dbms --query "MDEL myarr hello"       # Удалит hello по значению
+    ./dbms --query "MSIZE myarr"            # Выведет размер
+
+ОДНОСВЯЗНЫЙ СПИСОК (Linked List) - команды начинаются с F:
+──────────────────────────────────────────────────────────
+  FPUSH <name> <value>                 - Добавить элемент в конец
+  FADDHEAD <name> <value>              - Добавить элемент в начало
+  FADDAFTER <name> <target> <value>    - Добавить после элемента target
+  FADDBEFORE <name> <target> <value>   - Добавить перед элементом target
+  FDEL <name> <value>                  - Удалить элемент по значению
+  FDELHEAD <name>                      - Удалить первый элемент
+  FDELTAIL <name>                      - Удалить последний элемент
+  FGET <name>                          - Вывести весь список
+  FGET <name> <index>                  - Получить элемент по индексу
+  FEXISTS <name> <value>               - Проверить существование элемента
+
+  Примеры:
+    ./dbms --query "FPUSH list1 A"
+    ./dbms --query "FPUSH list1 B"
+    ./dbms --query "FADDHEAD list1 Z"       # Добавит Z в начало
+    ./dbms --query "FGET list1"             # Выведет: [Z A B]
+    ./dbms --query "FADDAFTER list1 A C"    # Добавит C после A
+    ./dbms --query "FADDBEFORE list1 B X"   # Добавит X перед B
+    ./dbms --query "FGET list1 2"           # Получит элемент с индексом 2
+    ./dbms --query "FEXISTS list1 B"        # Выведет: TRUE
+    ./dbms --query "FDEL list1 A"           # Удалит A
+    ./dbms --query "FDELHEAD list1"         # Удалит первый
+    ./dbms --query "FDELTAIL list1"         # Удалит последний
+
+ДВУСВЯЗНЫЙ СПИСОК (Double Linked List) - команды начинаются с L:
+─────────────────────────────────────────────────────────────────
+  LPUSH <name> <value>                 - Добавить элемент в конец
+  LUNSHIFT <name> <value>              - Добавить элемент в начало
+  LAFTER <name> <target> <value>       - Добавить после элемента target
+  LBEFORE <name> <target> <value>      - Добавить перед элементом target
+  LDEL <name> <value>                  - Удалить элемент по значению
+  LDELHEAD <name>                      - Удалить первый элемент
+  LDELTAIL <name>                      - Удалить последний элемент
+  LGET <name>                          - Вывести весь список
+  LEXISTS <name> <value>               - Проверить существование элемента
+
+  Примеры:
+    ./dbms --query "LPUSH dlist X"
+    ./dbms --query "LPUSH dlist Y"
+    ./dbms --query "LUNSHIFT dlist W"       # Добавит W в начало
+    ./dbms --query "LGET dlist"             # Выведет: [W X Y]
+    ./dbms --query "LAFTER dlist X M"       # Добавит M после X
+    ./dbms --query "LBEFORE dlist Y Z"      # Добавит Z перед Y
+    ./dbms --query "LEXISTS dlist X"        # Выведет: TRUE
+    ./dbms --query "LDEL dlist W"           # Удалит W
+    ./dbms --query "LDELHEAD dlist"         # Удалит первый
+    ./dbms --query "LDELTAIL dlist"         # Удалит последний
+
+СТЕК (Stack) - команды начинаются с S:
+───────────────────────────────────────
+  SPUSH <name> <value>  - Положить элемент в стек (push)
+  SPOP <name>           - Извлечь элемент из стека (pop)
+  SSIZE <name>          - Получить размер стека
+
+  Примеры:
+    ./dbms --query "SPUSH stack1 first"
+    ./dbms --query "SPUSH stack1 second"
+    ./dbms --query "SPUSH stack1 third"
+    ./dbms --query "SSIZE stack1"           # Выведет: 3
+    ./dbms --query "SPOP stack1"            # Выведет: third (LIFO)
+    ./dbms --query "SPOP stack1"            # Выведет: second
+    ./dbms --query "SPOP stack1"            # Выведет: first
+    ./dbms --query "SPOP stack1"            # Выведет: NULL (пустой стек)
+
+ОЧЕРЕДЬ (Queue) - команды начинаются с Q:
+──────────────────────────────────────────
+  QPUSH <name> <value>  - Добавить элемент в очередь (enqueue)
+  QPOP <name>           - Извлечь элемент из очереди (dequeue)
+
+  Примеры:
+    ./dbms --query "QPUSH queue1 first"
+    ./dbms --query "QPUSH queue1 second"
+    ./dbms --query "QPUSH queue1 third"
+    ./dbms --query "QPOP queue1"            # Выведет: first (FIFO)
+    ./dbms --query "QPOP queue1"            # Выведет: second
+    ./dbms --query "QPOP queue1"            # Выведет: third
+    ./dbms --query "QPOP queue1"            # Выведет: NULL (пустая очередь)
+
+AVL-ДЕРЕВО (AVL Tree) - команды начинаются с T:
+────────────────────────────────────────────────
+  TINSERT <name> <key>  - Вставить ключ в дерево
+  TDEL <name> <key>     - Удалить ключ из дерева
+  TGET <name> <key>     - Проверить существование ключа
+
+  Примеры:
+    ./dbms --query "TINSERT tree1 10"
+    ./dbms --query "TINSERT tree1 5"
+    ./dbms --query "TINSERT tree1 15"
+    ./dbms --query "TINSERT tree1 3"
+    ./dbms --query "TINSERT tree1 7"
+    ./dbms --query "TGET tree1 5"           # Выведет: TRUE
+    ./dbms --query "TGET tree1 100"         # Выведет: FALSE
+    ./dbms --query "TDEL tree1 10"          # Удалит узел с ключом 10
+    ./dbms --query "TINSERT tree1 10"       # Вставит снова
+
+═══════════════════════════════════════════════════════════════════════════════
+                            ПРИМЕРЫ ИСПОЛЬЗОВАНИЯ
+═══════════════════════════════════════════════════════════════════════════════
+
+# Работа с массивом
+./dbms --query "MPUSH arr hello"
+./dbms --query "MPUSH arr world"
+./dbms --query "MINSERT arr 1 middle"
+./dbms --query "MGET arr"               # [hello middle world]
+./dbms --query "MDELINDEX arr 1"
+./dbms --query "MSIZE arr"              # 2
+
+# Работа со стеком (LIFO)
+./dbms --query "SPUSH s 1"
+./dbms --query "SPUSH s 2"
+./dbms --query "SPUSH s 3"
+./dbms --query "SPOP s"                 # 3
+./dbms --query "SPOP s"                 # 2
+./dbms --query "SSIZE s"                # 1
+
+# Работа с очередью (FIFO)
+./dbms --query "QPUSH q A"
+./dbms --query "QPUSH q B"
+./dbms --query "QPUSH q C"
+./dbms --query "QPOP q"                 # A
+./dbms --query "QPOP q"                 # B
+
+# Работа с односвязным списком
+./dbms --query "FPUSH list node1"
+./dbms --query "FPUSH list node2"
+./dbms --query "FADDHEAD list node0"
+./dbms --query "FADDAFTER list node1 newnode"
+./dbms --query "FGET list"              # [node0 node1 newnode node2]
+./dbms --query "FEXISTS list newnode"   # TRUE
+
+# Работа с двусвязным списком
+./dbms --query "LPUSH dlist A"
+./dbms --query "LPUSH dlist B"
+./dbms --query "LUNSHIFT dlist START"
+./dbms --query "LAFTER dlist A X"
+./dbms --query "LGET dlist"             # [START A X B]
+
+# Работа с AVL-деревом
+./dbms --query "TINSERT tree 50"
+./dbms --query "TINSERT tree 25"
+./dbms --query "TINSERT tree 75"
+./dbms --query "TGET tree 25"           # TRUE
+./dbms --query "TDEL tree 50"
+
+═══════════════════════════════════════════════════════════════════════════════
+                           ДОПОЛНИТЕЛЬНЫЕ ПАРАМЕТРЫ
+═══════════════════════════════════════════════════════════════════════════════
+
+--file <filepath>  - Указать файл для сохранения данных (по умолчанию: file.data)
+--query <command>  - Команда для выполнения
+
+Пример с указанием файла:
+  ./dbms --file mydata.db --query "MPUSH arr test"
+
+═══════════════════════════════════════════════════════════════════════════════
+

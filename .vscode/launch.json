@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/danil/education/baseStruct/C++",
+      "program": "/Users/danil/education/baseStruct/C++/build/Debug/outDebug"
+    }
+  ]
+}
