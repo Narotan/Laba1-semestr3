@@ -1,0 +1,40 @@
+# macOS
+.DS_Store
+*.DS_Store
+*.AppleDouble
+*.LSOverride
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Binaries / object files
+*.o
+*.obj
+*.exe
+*.out
+*.class
+*.so
+*.dll
+
+# Backup / temporary files
+*~
+~$*
+*.swp
+*.tmp
+*.bak
+*.restore
+*.log
+
+# Word / Excel / Office temp files
+~$*.docx
+~$*.xlsx
+*.docx
+*.xlsx
+
+# Golang mod / cache (если не хочешь пушить vendor)
+vendor/
